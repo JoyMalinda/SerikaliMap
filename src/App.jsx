@@ -5,6 +5,9 @@ import {
   Route
 } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
+import CountiesMap from './pages/CountiesMap';
+import ConstituenciesMap from './pages/ConstituenciesMap';
+import CountyOfficials from './pages/CountyOfficials';
 
 function App() {
 
@@ -12,6 +15,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/maps/counties" element={<CountiesMap />} />
+        <Route path="/maps/constituencies" element={<ConstituenciesMap />} />
+        <Route path="/county-officials" element={<CountyOfficials />} />
       </Routes>
     </Router>
   )
