@@ -15,7 +15,7 @@ export default function LandingPage() {
 
   const [counties, setCounties] = useState([]);
   const [hoveredCounty, setHoveredCounty] = useState(null);
-  const [tooltip, setTooltip] = useState({ x: 0, y: 0, visible: false });
+  const [tooltip, setTooltip] = useState({ x: -10, y: 0, visible: false });
 
   const [selectedCountyId, setSelectedCountyId] = useState(null);
 

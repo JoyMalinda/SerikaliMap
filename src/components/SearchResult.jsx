@@ -47,7 +47,7 @@ export default function SearchResult({ query, data, onClose }) {
                 <img
                   src={leader.photo_url}
                   alt={leader.name}
-                  className="w-15 h-15 object-cover rounded-lg border border-gray-200"
+                  className="w-15 h-15 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
                 />
                 {/* Left: Name + Position */}
                 <div className="flex-1 ml-4">

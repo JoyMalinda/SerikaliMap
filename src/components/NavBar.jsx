@@ -52,9 +52,25 @@ export default function NavBar() {
             <a href="/" className="text-gray-800  hover:underline">
               Home
             </a>
-            <a href="/maps/counties" className="text-gray-800  hover:underline">
-              Maps
-            </a>
+            <div className="relative group">
+    <span className="text-gray-800 cursor-pointer hover:underline">
+      Maps
+    </span>
+    <div className="absolute left-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-md border opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform translate-y-1 transition duration-200 invisible group-hover:visible">
+      <a
+        href="/maps/counties"
+        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+      >
+        Counties
+      </a>
+      <a
+        href="/maps/constituencies"
+        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+      >
+        Constituencies
+      </a>
+    </div>
+  </div>
             <a href="/about" className="text-gray-800 hover:underline">
               About
             </a>

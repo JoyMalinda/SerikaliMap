@@ -86,8 +86,11 @@ export default function Presidents() {
   });
 
   const handleNameSearch = (searchName) => {
+    const nonAlphabetRegex = /[^a-zA-Z]/;
     if (!searchName.trim())
       toast.error("Please enter a name to search");
+    if (nonAlphabetRegex.test(searchName))
+      toast.error("Name can only contain alphabetic characters");
     if (searchName.length > 50)
       toast.error("Name is too long");
   setSearchName(searchName)
@@ -157,7 +160,7 @@ const handleYearSearch = (year) => {
         onChange={(e) => setFilterPosition(e.target.value)}
         className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-green-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
       >
-        <option value="">All Leaders</option>
+        <option value="All Leaders">All Leaders</option>
         <option value="President">President</option>
         <option value="Deputy President">Deputy President</option>
         <option value="Vice President">Vice President</option>
