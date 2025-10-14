@@ -175,6 +175,7 @@ export default function ConstituenciesMap() {
               <path
                 key={c.id}
                 d={c.svgPath}
+                id={c.name}
                 className="cursor-pointer transition-colors duration-200"
                 fill={isHovered ? "#d1d5db" : getConstFill(c)}
                 stroke= {isDarkMode() && selectedView==="Default" ? "#e2e5e9":"#000000"}
