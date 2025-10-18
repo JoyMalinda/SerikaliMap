@@ -176,7 +176,7 @@ export default function CountiesMap() {
     (county) => {
       if (!selectedPosition || selectedPosition === "Default") {
         // default neutral color depending on dark mode
-        return document.documentElement.classList.contains("dark") ? "#374151" /* gray-700 */ : "#ffffff";
+        return isDarkMode() ? "#374151" /* gray-700 */ : "#ffffff";
       }
       const official = countyToOfficial[county.name];
       if (!official || !official.party) {

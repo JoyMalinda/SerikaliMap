@@ -11,6 +11,14 @@ function formatPosition(key) {
   };
   return map[key] || key.replace("_", " ");
 }
+function toTitleCase(str, pos) {
+  if (pos === "mp") {
+  return str.replace(/\w\S*/g, (txt) => {
+    return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+  })} else {
+    return str;
+  }
+}
 
 export default function SearchResult({ query, data, onClose }) {
   const { location, leaders } = data || {};
@@ -53,7 +61,7 @@ export default function SearchResult({ query, data, onClose }) {
                 <div className="flex-1 ml-4">
                   
                   <div className="mb-2">
-                  <h3 className="font-semibold text-gray-800 dark:text-white">{leader.name}</h3>
+                  <h3 className="font-semibold text-gray-800 dark:text-white">{toTitleCase(leader.name, position)}</h3>
                   </div>
                   <div className="flex justify-between items-center">
                     <div>

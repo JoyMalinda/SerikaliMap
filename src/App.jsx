@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage';
 import CountiesMap from './pages/CountiesMap';
 import ConstituenciesMap from './pages/ConstituenciesMap';
 import CountyOfficials from './pages/CountyOfficials';
+import AboutPage from './pages/AboutPage';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/maps/counties" element={<CountiesMap />} />
         <Route path="/maps/constituencies" element={<ConstituenciesMap />} />
         <Route path="/county-officials" element={<CountyOfficials />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </Router>
   )

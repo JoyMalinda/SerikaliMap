@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../utils/axiosInstance"
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 
 function hashStringToHue(s) {
   let h = 0;
@@ -124,7 +125,7 @@ export default function ConstituenciesMap() {
       setPartyColorMap(map);
     }, [constituencies]);
 
-  if (loading) return <p>Loading constituencies...</p>;
+  if (loading) return <Loader />;
   if (error) return <p className="text-red-500">Failed to load constituencies.</p>;
 
   const getConstFill = (c) => {

@@ -167,7 +167,7 @@ export default function CountyOfficials() {
       <section className="mt-15">
         <div className="space-y-6 mx-12 my-6 dark:bg-gray-900">
           <h2 className="text-2xl font-semibold dark:text-white pt-4">
-            Elected National Officials
+            Elected County Officials
           </h2>
 
           {/* Search & Filters */}

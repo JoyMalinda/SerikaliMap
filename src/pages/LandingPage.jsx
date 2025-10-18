@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
-import { Search } from "lucide-react";
+import { Link, Search } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -12,10 +14,15 @@ export default function LandingPage() {
   const [query, setQuery] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const navigate = useNavigate();
 
   const [counties, setCounties] = useState([]);
   const [hoveredCounty, setHoveredCounty] = useState(null);
   const [tooltip, setTooltip] = useState({ x: -10, y: 0, visible: false });
+
+  const handleNavigate = () => {
+    navigate("/county-officials");
+  }
 
   const [selectedCountyId, setSelectedCountyId] = useState(null);
 
@@ -42,25 +49,28 @@ export default function LandingPage() {
       setShowResult(true);
     } catch (err) {
       console.error("Search failed:", err);
+      toast.error("Place not found. Please try again.");
     }
   };
   
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
+    <Toaster />
     <NavBar />
     <section className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 px-6 py-12 lg:px-16 bg-green-100">
       {/* Left Side */}
       <div className="space-y-6">
-        <h1 className="text-4xl font-bold text-gray-900 mt-8">
+        <h1 className="text-3xl font-bold text-gray-900 mt-8">
           Who Leads Where You Live?
         </h1>
-        <p className="text-3xl text-gray-600 max-w-xl my-12">
+        <p className="text-2xl text-gray-600 max-w-xl my-12">
           Discover your <span className="italic text-black">elected</span> officials, past and present. Search by name,
           county, or party and explore Kenya’s political history.
         </p>
 
         {/* Search Bar */}
+        <div>
         <form
           onSubmit={handleSearch}
           className="flex w-full max-w-lg border rounded-xl overflow-hidden bg-green-100"
@@ -79,6 +89,12 @@ export default function LandingPage() {
             <Search className="w-5 h-5" />
           </button>
         </form>
+
+
+        <button
+        className="border-2 rounded-lg w-[200px] h-[35px] mt-10 text-sm border-green-800"
+        onClick={handleNavigate}> Explore County Officials</button>
+        </div>
 
         {/* On mobile, map moves here */}
         <div className="lg:hidden w-full h-[400px] flex items-center justify-center bg-green-100 rounded-xl relative overflow-hidden">
