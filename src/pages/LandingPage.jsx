@@ -20,9 +20,13 @@ export default function LandingPage() {
   const [hoveredCounty, setHoveredCounty] = useState(null);
   const [tooltip, setTooltip] = useState({ x: -10, y: 0, visible: false });
 
-  const handleNavigate = () => {
+  const handleNavigate = (str) => {
+  if (str === "mp") {
+    navigate("/members-of-parliament");
+  } else if (str === "co") {
     navigate("/county-officials");
   }
+};
 
   const [selectedCountyId, setSelectedCountyId] = useState(null);
 
@@ -90,10 +94,16 @@ export default function LandingPage() {
           </button>
         </form>
 
-
+        <div className="flex space-x-4">
         <button
         className="border-2 rounded-lg w-[200px] h-[35px] mt-10 text-sm border-green-800"
-        onClick={handleNavigate}> Explore County Officials</button>
+        onClick={() => handleNavigate("co")}>Explore County Officials</button>
+        
+
+        <button
+        className="border-2 rounded-lg w-[120px] h-[35px] mt-10 text-sm border-green-800"
+        onClick={() => handleNavigate("mp")}>Explore MPs</button>
+        </div>
         </div>
 
         {/* On mobile, map moves here */}

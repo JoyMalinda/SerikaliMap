@@ -1,3 +1,4 @@
+import { Hash } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,7 @@ export default function Footer() {
         </div>
 
         {/* Right Section - Info Links */}
+        <div className="flex space-x-20">
         <div className="text-center">
           <h2 className="text-lg font-semibold mb-2 dark:text-gray-200">Info</h2>
           <ul className="space-y-1 ">
@@ -30,7 +32,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                to="/contact"
+                to="/about#contactcard"
                 className="text-black hover:text-green-700 transition dark:text-gray-300"
               >
                 Contact Us
@@ -38,14 +40,45 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                to="/terms"
+                to="/about#disclaimer"
                 className="text-black hover:text-green-700 transition dark:text-gray-300"
               >
-                Terms and Disclaimer
+                Disclaimer
               </Link>
             </li>
           </ul>
         </div>
+
+      <div className="text-center">
+          <h2 className="text-lg font-semibold mb-2 dark:text-gray-200">Legal</h2>
+          <ul className="space-y-1 ">
+            <li>
+              <Link
+                to="/legal#terms"
+                className="text-black hover:text-green-700 transition dark:text-gray-300"
+              >
+                Terms of Use
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/legal#privacy"
+                className="text-black hover:text-green-700 transition dark:text-gray-300"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/legal#cookies"
+                className="text-black hover:text-green-700 transition dark:text-gray-300"
+              >
+                Cookie Policy
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
       </div>
 
       {/* Divider Line */}
