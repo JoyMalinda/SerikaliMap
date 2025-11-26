@@ -77,7 +77,7 @@ export default function LandingPage() {
         <div>
         <form
           onSubmit={handleSearch}
-          className="flex w-full max-w-lg border rounded-xl overflow-hidden bg-green-100"
+          className="flex w-full max-w-lg border border-gray-800 rounded-xl overflow-hidden bg-green-100"
         >
           <input
             type="text"
@@ -96,12 +96,12 @@ export default function LandingPage() {
 
         <div className="flex space-x-4">
         <button
-        className="border-2 rounded-lg w-[200px] h-[35px] mt-10 text-sm border-green-800"
+        className="border-2 rounded-lg w-[200px] h-[35px] mt-10 text-sm border-green-800 text-gray-800"
         onClick={() => handleNavigate("co")}>Explore County Officials</button>
         
 
         <button
-        className="border-2 rounded-lg w-[120px] h-[35px] mt-10 text-sm border-green-800"
+        className="border-2 rounded-lg w-[120px] h-[35px] mt-10 text-sm border-green-800 text-gray-800"
         onClick={() => handleNavigate("mp")}>Explore MPs</button>
         </div>
         </div>

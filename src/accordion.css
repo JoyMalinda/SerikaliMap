@@ -1,12 +1,9 @@
 /* accordion.css */
 .accordion {
-  border: 1px solid #16a34a;
   border-radius: 8px;
-  background: #f9fafb;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  max-width: 720px;
-  font-family: system-ui, sans-serif;
+  max-width: 750px;
 }
 
 /* header button */
@@ -16,32 +13,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background: transparent;
   border: 0;
   text-align: left;
   cursor: pointer;
-  font-weight: 600;
-  color: #064e3b;
   transition: background 220ms ease;
 }
-.accordion__header:hover { background: #dcfce7; } /* light green */
-
-/* chevron */
-.accordion__chev {
-  transition: transform 260ms ease;
-}
-.accordion__chev.open {
-  transform: rotate(-180deg);
-}
-
-/* animated container */
-.accordion__body {
-  overflow: hidden;              /* hide during collapse */
-  max-height: 0;                 /* collapsed */
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-}
+/* .accordion__header:hover { background: #dcfce7; } /* light green */
 
 /* inner wrapper gives padding and content flow */
 .accordion__inner {
@@ -49,14 +26,4 @@
   color: #111827;
   line-height: 1.5;
   /* space children as needed */
-}
-
-/* open state */
-.accordion__body.is-open {
-  opacity: 1;
-  max-height: 1000px; /* must be larger than largest content height */
-}
-
-#state:checked ~ .accordion__body {  
-  max-height: 150px;
 }

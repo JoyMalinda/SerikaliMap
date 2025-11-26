@@ -287,7 +287,7 @@ export default function CountiesMap() {
     onChange={(e) => setSelectedPosition(e.target.value)}
     className="w-full px-3 py-2 rounded-md border bg-white dark:bg-gray-800 dark:text-gray-200"
   >
-    <option value="Default">Default</option>
+    <option value="Default">Select Position</option>
     {positions.map((p) => (
       <option key={p} value={p}>
         {p}
