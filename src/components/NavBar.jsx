@@ -101,25 +101,40 @@ export default function NavBar() {
       {/* Mobile Dropdown */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-60" : "max-h-0"
+          isOpen ? "max-h-80" : "max-h-0"
         }`}
       >
         <div className="px-4 pb-4 space-y-4 bg-green-100 dark:bg-gray-800">
           <a
             href="/"
-            className="block text-gray-800 dark:text-gray-200 hover:underline pt-4"
+            className="block text-gray-800 dark:text-gray-200 hover:underline pt-4 border-b"
           >
             Home
           </a>
-          <a
-            href="/maps/counties"
+          <div className="border-b">
+          <p
             className="block text-gray-800 dark:text-gray-200 hover:underline"
           >
             Maps
-          </a>
+          </p>
+            <div className="pl-4 space-y-2">
+              <a
+                href="/maps/counties"
+                className="block text-gray-800 dark:text-gray-300 hover:underline mt-1"
+              >
+                Counties
+              </a>
+              <a
+                href="/maps/constituencies"
+                className="block text-gray-800 dark:text-gray-300 hover:underline mt-2"
+              >
+                Constituencies
+              </a>
+            </div>
+            </div>
           <a
             href="/about"
-            className="block text-gray-800 dark:text-gray-200 hover:underline"
+            className="block text-gray-800 dark:text-gray-200 hover:underline border-b"
           >
             About
           </a>

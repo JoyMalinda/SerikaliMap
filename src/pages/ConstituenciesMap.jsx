@@ -164,7 +164,7 @@ export default function ConstituenciesMap() {
       <main className="px-4 lg:px-8 mt-8">
       <div className="py-4 flex flex-col lg:flex-row items-start gap-4">
         {/* Map */}
-        <div className="flex-1 rounded-xl overflow-hidden bg-green-50 dark:bg-gray-800 shadow" style={svgContainerStyle}>
+        <div className="w-full lg:flex-1 rounded-xl overflow-hidden bg-green-50 dark:bg-gray-800 shadow" style={svgContainerStyle}>
           <svg
             viewBox="33 -5 10 10"
             xmlns="http://www.w3.org/2000/svg"
@@ -233,18 +233,16 @@ export default function ConstituenciesMap() {
 
         {/* Controls + Legend */}
         <div className="w-full lg:w-72 space-y-3 p-4">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            Map controls
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">MP Party Distribution</h2>
 
           {/* Dropdown */}
           <select
             value={selectedView}
             onChange={(e) => setSelectedView(e.target.value)}
-            className="w-full px-3 py-2 rounded-md border bg-white dark:bg-gray-800 dark:text-gray-200"
+            className="w-full px-3 py-2 rounded-md border bg-white dark:bg-gray-800 dark:text-gray-200 focus:ring-1 focus:ring-green-400"
           >
-            <option value="Default">Default</option>
-            <option value="Party Distribution">Party Distribution</option>
+            <option value="Default">Select Tenure</option>
+            <option value="Party Distribution">2022-Present</option>
           </select>
 
           {/* Party Legend */}

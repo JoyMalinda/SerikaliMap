@@ -215,7 +215,7 @@ export default function CountiesMap() {
           
 
           {/* Map area */}
-          <div className="flex-1 rounded-xl overflow-hidden bg-green-50 dark:bg-gray-800 shadow" style={svgContainerStyle}>
+          <div className="w-full lg:flex-1 rounded-xl overflow-hidden bg-green-50 dark:bg-gray-800 shadow" style={svgContainerStyle}>
             <svg
               viewBox="33 -5 10 10"
               xmlns="http://www.w3.org/2000/svg"

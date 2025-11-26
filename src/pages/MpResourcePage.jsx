@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Search } from "lucide-react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 import {
   PieChart,
   Pie,
@@ -96,15 +97,7 @@ export default function MpResource() {
 
   if (loading) {
     return (
-      <div className="space-y-6 animate-pulse m-4">
-        <div className="bg-white shadow rounded-lg p-4 space-y-3">
-          <div className="w-full h-10 bg-gray-200 rounded" />
-          <div className="w-full h-10 bg-gray-200 rounded" />
-        </div>
-        <div className="bg-white rounded-lg shadow overflow-x-auto">
-          <div className="w-full h-40 bg-gray-200" />
-        </div>
-      </div>
+      <Loader />
     );
   }
 
