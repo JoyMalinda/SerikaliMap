@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import axios from "../utils/axiosInstance";
+import SuccessComponent from "../components/SuccessMail";
 
 export default function AboutPage() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function AboutPage() {
 
     try {
       const res = await axios.post(
-        "/api/contact",
+        "/send_mail",
         {
           email,
           message,
@@ -170,8 +171,8 @@ export default function AboutPage() {
         className="flex flex-col md:flex-row justify-center items-stretch mx-auto mb-12 bg-gray-50 dark:bg-gray-900 border-2 border-green-600 dark:border-green-800 rounded-lg max-w-4xl overflow-hidden"
       >
         {/* Left Info */}
-        <div className="flex-1 flex flex-col justify-center p-6 text-center md:text-left bg-gray-100 dark:bg-gray-900">
-          <h3 className="font-semibold text-lg text-green-900 dark:text-green-700 mb-2">
+        <div className="flex-1 flex flex-col justify-center p-6 text-center md:text-left bg-gray-100 dark:bg-gray-900 my-7">
+          <h3 className="font-semibold text-lg text-green-900 dark:text-green-700 mb-4">
             Contribute and Contact Us
           </h3>
           <p className="text-sm mb-1 dark:text-gray-300">We welcome suggestions and corrections.</p>
@@ -188,7 +189,7 @@ export default function AboutPage() {
               name="name"
               required
               type="text"
-              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
+              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700 dark:text-gray-200"
               placeholder="Your Name"
             />
             <input
@@ -197,7 +198,7 @@ export default function AboutPage() {
               value={email}
               type="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
+              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700 dark:text-gray-200"
               placeholder="Your Email"
             />
             <textarea
@@ -205,7 +206,7 @@ export default function AboutPage() {
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 h-24 resize-none focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
+              className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 h-24 resize-none focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700 dark:text-gray-200"
               placeholder="Share Your Thoughts..."
             />
             <input
@@ -222,7 +223,7 @@ export default function AboutPage() {
             >
               {loading ? "Sending..." : "Submit"}
             </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="font-light" style={{ color: "red" }}>{error}</p>}
           </form>
           {sent && <SuccessComponent />}
         </div>
