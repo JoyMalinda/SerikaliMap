@@ -7,7 +7,12 @@
     --color-light-green: #d7e8d7;
     --color-light-red: #FB4A4A;
 }
+
 body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#contact-card{
   font-family: 'Montserrat', sans-serif;
 }
 
