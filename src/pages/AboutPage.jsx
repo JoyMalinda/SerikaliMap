@@ -1,8 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import axios from "../utils/axiosInstance";
 
 export default function AboutPage() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [sent, setSent] = useState(false); // animation trigger
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSent(false);
+
+    try {
+      const res = await axios.post(
+        "/api/contact",
+        {
+          email,
+          message,
+          middleName: "" // honeypot MUST be empty
+        },
+        { withCredentials: true }  // so cookies work for rate limit
+      );
+
+      if (res.data?.success) {
+        setSent(true); // <-- trigger animation
+      }
+    } catch (err) {
+      // If the backend returned a response
+      if (err.response) {
+        const { status, data } = err.response;
+
+        // ------------- RATE LIMITED (429) -------------
+        if (status === 429) {
+          setError("Too many requests. Try again later.");
+        }
+
+        // ----------- SPAM DETECTED -------------
+        else if (status === 400 && data?.error === "Spam detected") {
+          setError("Too many requests. Try again later.");
+        }
+
+        // ----------- NORMAL VALIDATION ERROR -------------
+        else if (status === 400 && data?.error) {
+          setError(data.error);
+        }
+
+        // ----------- GENERIC SERVER ERROR -------------
+        else {
+          setError("Something went wrong. Try again.");
+        }
+      } else {
+        // Network or Axios internal error
+        setError("Network error. Try again.");
+      }
+    }
+
+    setLoading(false);
+  }
+
   return (
     <div className="min-h-screen flex flex-col dark:bg-gray-900">
       <NavBar />
@@ -122,26 +183,48 @@ export default function AboutPage() {
 
         {/* Right Form */}
         <div className="flex-1 bg-white p-6 dark:bg-gray-800">
-          <form className="flex flex-col gap-4 dark:text-gray-400">
+          <form className="flex flex-col gap-4 dark:text-gray-400" style={sent ? { display: "none" } : {}}>
             <input
+              name="name"
+              required
+              type="text"
               className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
               placeholder="Your Name"
             />
             <input
+              name="email"
+              required
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
               className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
               placeholder="Your Email"
             />
             <textarea
+              name="message"
+              required
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="border border-gray-400 dark:border-gray-600 rounded px-3 py-2 h-24 resize-none focus:ring-1 focus:ring-green-400 focus:outline-none dark:bg-gray-700"
               placeholder="Share Your Thoughts..."
             />
+            <input
+              type="text"
+              name="middleName"
+              style={{ display: "none" }}
+              onChange={() => {}}
+              />
             <button
               type="submit"
+              disabled={loading}
+              onClick={handleSubmit}
               className="bg-green-600 dark:bg-green-800 dark:text-gray-300 text-white font-medium py-2 px-4 rounded hover:bg-green-700 transition w-full md:w-32 self-center md:self-start"
             >
-              Submit
+              {loading ? "Sending..." : "Submit"}
             </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </form>
+          {sent && <SuccessComponent />}
         </div>
       </section>
 
