@@ -4,6 +4,8 @@ import axios from "../utils/axiosInstance";
 import NavBar from "../components/NavBar";
 import CountyModal from "../components/CountyModal"; 
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
+import ErrorPage from "../components/ErrorPage";
 
 // Helper: deterministic color generator for fallback parties
 function hashStringToHue(s) {
@@ -77,6 +79,8 @@ function isDarkMode() {
   return false;
 }
 
+const positions = ["Governor", "Senator", "Women Representative"];
+
 export default function CountiesMap() {
   const [counties, setCounties] = useState([]); // from /maps/counties
   const [officials, setOfficials] = useState([]); // from /officials/counties (cached once)
@@ -85,6 +89,8 @@ export default function CountiesMap() {
   const [tooltip, setTooltip] = useState({ x: 0, y: 0, visible: false });
   const [selectedCountyId, setSelectedCountyId] = useState(null);
   const [partyColorMap, setPartyColorMap] = useState({}); // partyAbbrev -> color hex
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // fetch counties (SVG paths)
   useEffect(() => {
@@ -93,9 +99,10 @@ export default function CountiesMap() {
       try {
         const res = await axios.get("/maps/counties");
         if (!cancelled) setCounties(res.data);
-        console.log("Data:", res.data);
       } catch (err) {
-        console.error("Failed to fetch counties:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchCounties();
@@ -112,7 +119,7 @@ export default function CountiesMap() {
         const res = await axios.get("/officials/counties");
         if (!cancelled) setOfficials(res.data.officials || res.data);
       } catch (err) {
-        console.error("Failed to fetch officials:", err);
+        setError(err);
       }
     };
     fetchOfficials();
@@ -134,6 +141,8 @@ export default function CountiesMap() {
     Object.keys(seen).forEach((abbrev) => {
       map[abbrev] = getPartyColor(abbrev, abbrev);
     });
+
+    
 
     // ensure specified parties have exactly the requested colors
     map["ODM"] = getPartyColor("ODM", "Orange Democratic Movement");
@@ -176,11 +185,11 @@ export default function CountiesMap() {
     (county) => {
       if (!selectedPosition || selectedPosition === "Default") {
         // default neutral color depending on dark mode
-        return isDarkMode() ? "#374151" /* gray-700 */ : "#ffffff";
+        return isDarkMode() ? "#3A3A3A" /* gray-700 */ : "#ffffff";
       }
       const official = countyToOfficial[county.name];
       if (!official || !official.party) {
-        return isDarkMode() ? "#4b5563" : "#f3f4f6"; // fallback neutral
+        return isDarkMode() ? "#3A3A3A" : "#f3f4f6"; // fallback neutral
       }
       const abbrev = official.party.abbrev || official.party.name || "IND";
       return partyColorMap[abbrev] || getPartyColor(abbrev, official.party.name);
@@ -198,12 +207,41 @@ export default function CountiesMap() {
     }));
   };
 
+  // Add this useEffect right after your existing useEffects
+useEffect(() => {
+  // Get URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const position = urlParams.get('position');
+  
+  // If position parameter exists and is valid, set it
+  if (position && positions.includes(position)) {
+    setSelectedPosition(position);
+  }
+}, []); // Empty dependency array - runs once on mount
+
   // Controls: position buttons and default button
-  const positions = ["Governor", "Senator", "Women Rep"];
 
   // Make svg full screen height (minus navbar). If your navbar has a fixed height, you can set a CSS var.
   // Using inline style: height: calc(100vh - 64px) — adjust 64px if needed.
   const svgContainerStyle = { height: "calc(100vh - 64px)" };
+
+  const handlePositionChange = (e) => {
+  const newPosition = e.target.value;
+  setSelectedPosition(newPosition);
+  
+  // Update URL without page reload
+  const url = new URL(window.location);
+  if (newPosition === "Default") {
+    url.searchParams.delete('position');
+  } else {
+    url.searchParams.set('position', newPosition);
+  }
+  window.history.pushState({}, '', url);
+};
+  if (loading) return <Loader />;
+  if (error) return (
+    <ErrorPage message="Failed to load counties map." /> 
+  );
 
   return (
     
@@ -284,7 +322,7 @@ export default function CountiesMap() {
   {/* Dropdown instead of button group */}
   <select
     value={selectedPosition}
-    onChange={(e) => setSelectedPosition(e.target.value)}
+    onChange={handlePositionChange}
     className="w-full px-3 py-2 rounded-md border bg-white dark:bg-gray-800 dark:text-gray-200"
   >
     <option value="Default">Select Position</option>

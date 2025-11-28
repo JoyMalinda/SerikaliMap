@@ -108,7 +108,7 @@ const handleYearSearch = (year) => {
 
 
   return (
-    <div className="space-y-6 mx-12 my-6 dark:bg-gray-900">
+    <div className="space-y-6 px-[clamp(1rem,4vw,3rem)] my-6 dark:bg-gray-900">
       <Toaster />
 
       {/* Current Leaders */}

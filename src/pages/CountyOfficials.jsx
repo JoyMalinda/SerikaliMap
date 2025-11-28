@@ -153,12 +153,18 @@ export default function CountyOfficials() {
     { title: "Senators", data: stats?.Senator?.party_distribution },
   ];
 
+  const partyLinks = [
+    { name: "Governor", data: stats?.Governor?.party_distribution },
+    { name: "Women Representative", data: stats?.["Women Representative"]?.party_distribution },
+    { name: "Senator", data: stats?.Senator?.party_distribution },
+  ];
+
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">
       <NavBar />
       <Toaster position="top-center" reverseOrder={false} />
-      <section className="mt-15">
-        <div className="space-y-6 mx-12 my-6 dark:bg-gray-900">
+      <section className="mt-15 px-[clamp(2rem,4vw,3rem)]">
+        <div className="space-y-6 my-6 dark:bg-gray-900">
           <h2 className="text-2xl font-semibold dark:text-white pt-4">
             Elected County Officials
           </h2>
@@ -325,7 +331,7 @@ export default function CountyOfficials() {
                 chart.data && (
                   <div
                     key={i}
-                    className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow w-full md:w-1/3"
+                    className="bg-white flex flex-col dark:bg-gray-800 rounded-lg p-4 shadow w-full md:w-1/3"
                   >
                     <h4 className="text-lg font-medium mb-2 dark:text-gray-200">
                       {chart.title}
@@ -355,6 +361,12 @@ export default function CountyOfficials() {
                         />
                       </PieChart>
                     </ResponsiveContainer>
+                    {partyLinks.map(
+                      (link) =>
+                        link.name === chart.title.slice(0, -1) && (
+                          <a href={`/maps/counties?position=${link.name}`} className="text-blue-500 ml-auto">View on map &gt;</a>
+                        )
+                    )}
                   </div>
                 )
             )}

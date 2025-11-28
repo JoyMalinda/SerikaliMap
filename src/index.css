@@ -6,6 +6,8 @@
 @theme {
     --color-light-green: #d7e8d7;
     --color-light-red: #FB4A4A;
+    --gray-900: #121212;
+    --gray-800: #1E1E1E;
 }
 
 body {
@@ -24,6 +26,14 @@ body {
 }
 
 html { scroll-behavior: smooth; }
+
+@theme{
+  --color-gray-900: #121212;
+  --color-gray-800: #1E1E1E;
+  --color-gray-700: #2C2C2C;
+  --color-gray-600: #3A3A3A;
+  --color-gray-500: #525252;
+}
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
