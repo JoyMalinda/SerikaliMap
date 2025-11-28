@@ -177,3 +177,7 @@ html { scroll-behavior: smooth; }
 @keyframes l15{ 
   100%{transform: rotate(1turn)}
 }
+
+#gazettes, #parliamentlinks li {
+  list-style-type: circle;
+}
