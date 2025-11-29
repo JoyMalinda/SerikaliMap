@@ -20,6 +20,10 @@ export default function LandingPage() {
   const [hoveredCounty, setHoveredCounty] = useState(null);
   const [tooltip, setTooltip] = useState({ x: -10, y: 0, visible: false });
 
+  const [touchStartPos, setTouchStartPos] = useState({ x: 0, y: 0 });
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [touchedCounty, setTouchedCounty] = useState(null);
+
   const handleNavigate = (str) => {
   if (str === "mp") {
     navigate("/members-of-parliament");
@@ -56,6 +60,63 @@ export default function LandingPage() {
       toast.error("Place not found. Please try again.");
     }
   };
+
+  // Detect if finger is tapping or scrolling
+const handleTouchStart = (e, county) => {
+  const touch = e.touches[0];
+  setTouchStartPos({ x: touch.clientX, y: touch.clientY});
+  setIsScrolling(false);
+
+  const svg = e.currentTarget.closest("svg");
+  const bounds = svg.getBoundingClientRect();
+  const localX = touch.clientX - bounds.left;
+  const localY = touch.clientY - bounds.top;
+
+  // Simulate hover
+  setHoveredCounty(county);
+  setTouchedCounty(county);
+  setTooltip({ 
+    x: localX + 10,
+    y: localY - 60, 
+    visible: true });
+};
+
+const handleTouchMove = (e) => {
+  const touch = e.touches[0];
+
+  const dx = Math.abs(touch.clientX - touchStartPos.x);
+  const dy = Math.abs(touch.clientY - touchStartPos.y);
+
+  // If finger moves too much → scrolling
+  if (dx > 20 || dy > 20) {
+    setIsScrolling(true);
+
+    // Stop hover while scrolling
+    setHoveredCounty(null);
+    setTooltip((prev) => ({ ...prev, visible: false }));
+  }
+};
+
+const handleTouchEnd = (county) => {
+  // If finger moved → user was scrolling, NOT tapping
+  if (isScrolling) return;
+
+  // If tapped same county again → consider as click
+  if (touchedCounty && touchedCounty.id === county.id) {
+    setSelectedCountyId(county.id);
+  }
+
+  // Clear the hover after tap
+  setTimeout(() => {
+    setHoveredCounty(null);
+    setTooltip((prev) => ({ ...prev, visible: false }));
+  }, 150);
+};
+
+const handleTouchCancel = () => {
+  setHoveredCounty(null);
+  setTooltip((prev) => ({ ...prev, visible: false }));
+};
   
 
   return (
@@ -144,6 +205,10 @@ export default function LandingPage() {
                   setSelectedCountyId(county.id)
                   console.log("Clicked county:", county.name);
                 }}
+                onTouchStart={(e) => handleTouchStart(e,county)}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={() => handleTouchEnd(county)}
+                onTouchCancel={handleTouchCancel}
               />
             ))}
           </svg>
@@ -197,6 +262,10 @@ export default function LandingPage() {
                 setSelectedCountyId(county.id)
                 console.log("Clicked county:", county.name);
               }}
+              onTouchStart={(e) => handleTouchStart(e,county)}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={() => handleTouchEnd(county)}
+              onTouchCancel={handleTouchCancel}
             />
           ))}
         </svg>
