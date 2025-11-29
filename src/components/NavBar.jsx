@@ -40,7 +40,7 @@ export default function NavBar() {
       <div className=" mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex-shrink-0 text-2xl font-bold ml-8">
+          <div className="flex-shrink-0 text-2xl font-bold ml-6">
             <Link to="/">
               <span className="text-green-800 ">Serikali</span>
               <span className="text-black">Map</span>

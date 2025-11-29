@@ -3,6 +3,7 @@ import axios from "../utils/axiosInstance"
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
+import ErrorPage from "../components/ErrorPage";
 
 function hashStringToHue(s) {
   let h = 0;
@@ -92,7 +93,6 @@ export default function ConstituenciesMap() {
         const response = await axios.get("/maps/constituencies"); 
         setConstituencies(response.data);
       } catch (err) {
-        console.error("Error fetching constituencies:", err);
         setError(err);
       } finally {
         setLoading(false);
@@ -126,16 +126,18 @@ export default function ConstituenciesMap() {
     }, [constituencies]);
 
   if (loading) return <Loader />;
-  if (error) return <p className="text-red-500">Failed to load constituencies.</p>;
+  if (error) return (
+    <ErrorPage message="Failed to load constituencies map." /> 
+  );
 
   const getConstFill = (c) => {
   if (!selectedView || selectedView === "Default") {
-    return isDarkMode() ? "#374151" /* gray-700 */ : "#fff" ;
+    return isDarkMode() ? "#3A3A3A" /* gray-700 */ : "#fff" ;
   }
 
   const official = c?.mp;
   if (!official || !official.party) {
-    return isDarkMode() ? "#4b5563" : "#e2e5e9";
+    return isDarkMode() ? "#3A3A3A" : "#e2e5e9";
   }
 
   const abbrev = official.party.abbreviation || "Independent";

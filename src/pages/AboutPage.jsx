@@ -139,23 +139,74 @@ export default function AboutPage() {
               Our Data Sources
             </h2>
             <p>We use publicly accessible and reputable sources, including:</p>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="list-disc list-inside space-y-2 pl-6">
               <li>
-                Kenya National Bureau of Statistics (KNBS) –{" "}
+                Several Kenya Government Gazettes, including:{" "}
+                <ul className="list-inside space-y-1 pl-6" id="gazettes">
+                  <li >
+                    <a
+                      href="https://new.kenyalaw.org/akn/ke/officialGazette/gazette/2022-08-23/169/eng@2022-08-23"
+                      className="text-green-700 underline hover:text-green-900"
+                    >
+                      Kenya Gazette Vol. CXXIV-No. 169
+                    </a>
+                  </li>
+                  <li >
+                    <a
+                      href="https://new.kenyalaw.org/akn/ke/officialGazette/gazette/2022-08-24/170/eng@2022-08-24"
+                      className="text-green-700 underline hover:text-green-900"
+                    >
+                      Kenya Gazette Vol. CXXIV-No. 170
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Office of the Registrar of Political Parties (ORPP) – {" "}
                 <a
-                  href="https://www.knbs.or.ke"
+                  href="https://orpp.or.ke/list-of-political-parties/"
                   className="text-green-700 underline hover:text-green-900"
                 >
-                  https://www.knbs.or.ke
+                  www.orpp.or.ke
                 </a>
               </li>
               <li>
-                Independent Electoral and Boundaries Commission (IEBC) –{" "}
+                The Parliament Website, i.e., {" "}
+                <ul className="list-inside space-y-1 pl-6" id="parliamentlinks">
+                  <li>
                 <a
-                  href="https://www.iebc.or.ke"
+                  href="https://www.parliament.go.ke/the-senate/senators"
                   className="text-green-700 underline hover:text-green-900"
                 >
-                  https://www.iebc.or.ke
+                  The Senate Page
+                </a>
+                  </li>
+                  <li>
+                <a
+                  href="https://www.parliament.go.ke/the-national-assembly/mps"
+                  className="text-green-700 underline hover:text-green-900"
+                >
+                  The National Assembly Page
+                </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Kenya Women Parliamentary Association (KEWOPA) – {" "}
+                <a
+                  href="https://www.kewopa.org/?page_id=965"
+                  className="text-green-700 underline hover:text-green-900"
+                >
+                  www.kewopa.org
+                </a>
+              </li>
+              <li>
+                Council of Governors (CoG) – {" "}
+                <a
+                  href="https://cog.go.ke/current-governors/"
+                  className="text-green-700 underline hover:text-green-900"
+                >
+                  cog.go.ke
                 </a>
               </li>
               <li>County government websites and official press releases</li>
