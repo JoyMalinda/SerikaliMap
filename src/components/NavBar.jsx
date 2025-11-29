@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
+import i18n from "i18next";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,6 +72,14 @@ export default function NavBar() {
       </a>
     </div>
   </div>
+            <select
+      onChange={(e) => i18n.changeLanguage(e.target.value)}
+      defaultValue={i18n.language}
+      className="border rounded p-1 text-black hover:underline"
+    >
+      <option value="en">English</option>
+      <option value="sw">Kiswahili</option>
+    </select>
             <a href="/about" className="text-gray-800 hover:underline">
               About
             </a>
@@ -132,17 +141,26 @@ export default function NavBar() {
               </a>
             </div>
             </div>
+            
           <a
             href="/about"
             className="block text-gray-800 dark:text-gray-200 hover:underline border-b"
           >
             About
           </a>
-
+          <div className="flex items-center justify-between px-2">
+          <select
+      onChange={(e) => i18n.changeLanguage(e.target.value)}
+      defaultValue={i18n.language}
+      className="border rounded p-2 dark:text-gray-300 text-black hover:underline"
+    >
+      <option value="en">English</option>
+      <option value="sw">Kiswahili</option>
+    </select>
           {/* Dark Mode Toggle with Label */}
           <button
             onClick={toggleTheme}
-            className="flex items-center space-x-2 p-2 rounded-md border-1 border-green-300"
+            className="flex items-center space-x-2 p-2 rounded-md border"
           >
             {theme === "light" ? (
               <>
@@ -156,6 +174,7 @@ export default function NavBar() {
               </>
             )}
           </button>
+          </div>
         </div>
       </div>
     </nav>

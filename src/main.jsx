@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
 import './accordion.css'
 import './index.css'
+import "./i18n";
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(

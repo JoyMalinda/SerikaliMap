@@ -3,6 +3,7 @@ import axios from "../utils/axiosInstance";
 import { Link, Search } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -19,6 +20,7 @@ export default function LandingPage() {
   const [counties, setCounties] = useState([]);
   const [hoveredCounty, setHoveredCounty] = useState(null);
   const [tooltip, setTooltip] = useState({ x: -10, y: 0, visible: false });
+  const { t } = useTranslation();
 
   const handleNavigate = (str) => {
   if (str === "mp") {
@@ -66,7 +68,7 @@ export default function LandingPage() {
       {/* Left Side */}
       <div className="space-y-6">
         <h1 className="text-3xl font-bold text-gray-900 mt-8">
-          Who Leads Where You Live?
+          {t("landingpage.title")}
         </h1>
         <p className="text-2xl text-gray-600 max-w-xl my-12">
           Discover your <span className="italic text-black">elected</span> officials, past and present. Search by name,
